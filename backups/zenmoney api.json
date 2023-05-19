@@ -1,11 +1,6 @@
 {
   "active": false,
   "connections": {
-    "Telegram Trigger": {
-      "main": [
-        []
-      ]
-    },
     "When clicking \"Execute Workflow\"": {
       "main": [
         [
@@ -21,11 +16,6 @@
           }
         ]
       ]
-    },
-    "HTTP Request": {
-      "main": [
-        []
-      ]
     }
   },
   "createdAt": "2023-05-17T18:52:33.449Z",
@@ -34,32 +24,8 @@
   "nodes": [
     {
       "parameters": {
-        "updates": [
-          "message"
-        ],
-        "additionalFields": {}
-      },
-      "id": "b6ec3036-adeb-47df-b724-ee16daf7c125",
-      "name": "Telegram Trigger",
-      "type": "n8n-nodes-base.telegramTrigger",
-      "typeVersion": 1,
-      "position": [
-        820,
-        200
-      ],
-      "webhookId": "75f9015d-3f38-4e14-b09c-a205b7394299",
-      "credentials": {
-        "telegramApi": {
-          "id": "1",
-          "name": "Telegram account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
         "method": "POST",
-        "url": "https://api.zenmoney.ru",
+        "url": "api.zenmoney.ru",
         "authentication": "genericCredentialType",
         "genericAuthType": "oAuth2Api",
         "options": {}
@@ -69,16 +35,16 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        1080,
+        1140,
         320
       ],
+      "alwaysOutputData": true,
       "credentials": {
         "oAuth2Api": {
           "id": "7",
           "name": "zenmoney"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {},
@@ -119,6 +85,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-05-18T13:58:03.000Z",
-  "versionId": "c803fc2f-7afd-4cdd-af98-e1fb5569f341"
+  "updatedAt": "2023-05-19T16:28:07.000Z",
+  "versionId": "9cb289c2-3edd-4833-8fe8-1c8113c8533a"
 }
