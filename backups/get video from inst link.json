@@ -1,0 +1,124 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-16T18:45:32.616Z",
+  "id": "10",
+  "name": "get video from inst link",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "86312a97-add9-4e3e-a613-c08490fbc712",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        620,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "value": "https://www.instagram.com/p/Cr5CDotIpUZ/?__a=1&__d=dis"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "596df293-a4fc-4a12-8c6e-bf5ec690d7ab",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.instagram.com/p/Cr5CDotIpUZ/?__a=1&__d=dis",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "id": "facfa55c-4fb8-4d71-8641-983b1d1b224b",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1060,
+        300
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "6",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001556945921",
+        "text": "={{ $json.graphql.shortcode_media.video_url }}",
+        "additionalFields": {}
+      },
+      "id": "1378c24a-b5bb-4702-8c77-af5491c663f0",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        300
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-05-16T19:06:26.000Z",
+  "versionId": "2aabfa27-63be-4e14-ac4f-7031ce8514b3"
+}
