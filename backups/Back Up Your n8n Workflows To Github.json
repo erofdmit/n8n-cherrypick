@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "n8n": {
       "main": [
@@ -211,8 +211,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "githubApi": {
-          "id": "2",
-          "name": "GitHub account"
+          "id": "15",
+          "name": "erofdmit"
         }
       },
       "continueOnFail": true
@@ -299,8 +299,8 @@
       "typeVersion": 1,
       "credentials": {
         "githubApi": {
-          "id": "2",
-          "name": "GitHub account"
+          "id": "15",
+          "name": "erofdmit"
         }
       }
     },
@@ -323,8 +323,8 @@
       "typeVersion": 1,
       "credentials": {
         "githubApi": {
-          "id": "2",
-          "name": "GitHub account"
+          "id": "15",
+          "name": "erofdmit"
         }
       }
     },
@@ -348,7 +348,7 @@
           "string": [
             {
               "name": "repo.owner",
-              "value": "Dev1love"
+              "value": "erofdmit"
             },
             {
               "name": "repo.name",
@@ -490,6 +490,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-05-18T14:17:37.000Z",
-  "versionId": "6a3bba1e-c188-4e20-9ba6-0e68e694a1a6"
+  "updatedAt": "2023-05-19T16:06:22.000Z",
+  "versionId": "e0a87892-89c7-4769-b9dc-7d4f6b389f45"
 }
