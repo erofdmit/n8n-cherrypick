@@ -1,0 +1,723 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "получаем Workspaces пользователя",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "получаем Workspaces пользователя": {
+      "main": [
+        [
+          {
+            "node": "получаем Users из Workspace",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Получаем имена проектов в Workspace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "получаем Users из Workspace": {
+      "main": [
+        [
+          {
+            "node": "Список юзеров в воркспейсе",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Получаем имена проектов в Workspace": {
+      "main": [
+        [
+          {
+            "node": "Имена проектов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Список юзеров в воркспейсе": {
+      "main": [
+        [
+          {
+            "node": "TimeEntry по юзерам",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Добавляем имена юзеров к TimeEntry",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "TimeEntry по юзерам": {
+      "main": [
+        [
+          {
+            "node": "Список всех Time Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Список всех Time Entry": {
+      "main": [
+        [
+          {
+            "node": "Добавляем имена проектов к Time Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Имена проектов": {
+      "main": [
+        [
+          {
+            "node": "Добавляем имена проектов к Time Entry",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Добавляем имена проектов к Time Entry": {
+      "main": [
+        [
+          {
+            "node": "Добавляем имена юзеров к TimeEntry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Добавляем имена юзеров к TimeEntry": {
+      "main": [
+        [
+          {
+            "node": "Убираем лишние поля",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Убираем лишние поля": {
+      "main": [
+        [
+          {
+            "node": "Убираем неоконченные TimeEntry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Убираем неоконченные TimeEntry": {
+      "main": [
+        [
+          {
+            "node": "Drop Dublicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drop Dublicates": {
+      "main": [
+        [
+          {
+            "node": "TimeEntry за последние две недели",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TimeEntry за последние две недели": {
+      "main": [
+        [
+          {
+            "node": "Считаем абсолютную длительность TimeEntry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Считаем абсолютную длительность TimeEntry": {
+      "main": [
+        [
+          {
+            "node": "Суммы по пользователям",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "получаем Workspaces пользователя",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "получаем Workspaces пользователя",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Суммы по пользователям": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-18T20:29:51.943Z",
+  "id": "16",
+  "name": "Clockify Get Time Entries and Send it to Telegram",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4deff74a-3c36-45d1-b0e7-b6d2d28363f9",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        40,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.clockify.me/api/v1/workspaces",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clockifyApi",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 100
+            }
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "6e4c7281-8334-4725-895c-e7cf6d15cf2e",
+      "name": "получаем Workspaces пользователя",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        440,
+        360
+      ],
+      "credentials": {
+        "clockifyApi": {
+          "id": "13",
+          "name": "Clockify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.clockify.me/api/v1/workspaces/{{ $json.id }}/users ",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clockifyApi",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 100
+            }
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "bd42ac7d-377c-48b7-b7e9-3015a5a7a404",
+      "name": "получаем Users из Workspace",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        660,
+        360
+      ],
+      "credentials": {
+        "clockifyApi": {
+          "id": "13",
+          "name": "Clockify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.clockify.me/api/v1/workspaces/{{ $json.id }}/projects?page-size=100",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clockifyApi",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 100
+            }
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "b7c36bb1-0f67-4814-ae0f-b8ea26fdbebb",
+      "name": "Получаем имена проектов в Workspace",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        700,
+        580
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "clockifyApi": {
+          "id": "13",
+          "name": "Clockify account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "userId",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "user_name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "activeWorkspace",
+              "value": "={{ $json.activeWorkspace }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ab147567-017b-4850-b6d1-030fa4eb2c99",
+      "name": "Список юзеров в воркспейсе",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        880,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.clockify.me/api/v1/workspaces/{{ $json.activeWorkspace }}/user/{{ $json.userId }}/time-entries?page-size=5000",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "clockifyApi",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 100
+            }
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "8bfc022b-84bf-457f-9b38-e9f72b6c110f",
+      "name": "TimeEntry по юзерам",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1120,
+        200
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "clockifyApi": {
+          "id": "13",
+          "name": "Clockify account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "projectId",
+              "value": "={{ $json.projectId }}"
+            },
+            {
+              "name": "userId",
+              "value": "={{ $json.userId }}"
+            },
+            {
+              "name": "description",
+              "value": "={{ $json.description }}"
+            },
+            {
+              "name": "timeInterval.start",
+              "value": "={{ $json.timeInterval.start }}"
+            },
+            {
+              "name": "timeInterval.end",
+              "value": "={{ $json.timeInterval.end }}"
+            },
+            {
+              "name": "timeInterval.duration",
+              "value": "={{ $json.timeInterval.duration }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b60432aa-e2a0-4119-b992-047a384a4f31",
+      "name": "Список всех Time Entry",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "project_name",
+              "value": "={{ $json.name }}"
+            },
+            {
+              "name": "projectId",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6f66c370-b646-4ebb-b1e0-aae946139c9d",
+      "name": "Имена проектов",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "projectId",
+              "field2": "projectId"
+            }
+          ]
+        },
+        "joinMode": "keepEverything",
+        "options": {}
+      },
+      "id": "47d78df7-7aab-4ad1-9ca1-e35c909274c4",
+      "name": "Добавляем имена проектов к Time Entry",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "userId",
+              "field2": "userId"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ab214276-7722-4bdd-a3ae-3ab568dcae69",
+      "name": "Добавляем имена юзеров к TimeEntry",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "project_name",
+              "value": "={{ $json.project_name }}"
+            },
+            {
+              "name": "user_name",
+              "value": "={{ $json.user_name }}"
+            },
+            {
+              "name": "description",
+              "value": "={{ $json.description }}"
+            },
+            {
+              "name": "timeInterval.start",
+              "value": "={{ $json.timeInterval.start }}"
+            },
+            {
+              "name": "timeInterval.end",
+              "value": "={{ $json.timeInterval.end }}"
+            },
+            {
+              "name": "timeInterval.duration",
+              "value": "={{ $json.timeInterval.duration }} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5874c3d4-27a7-4082-b7c6-032e4e54c9d8",
+      "name": "Убираем лишние поля",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "= {{ $json.timeInterval.end }}",
+              "operation": "notEqual",
+              "value2": "={{null  }} "
+            }
+          ]
+        }
+      },
+      "id": "08b3a336-c955-4643-b826-315639fc053a",
+      "name": "Убираем неоконченные TimeEntry",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "removeDuplicates",
+        "compare": "allFieldsExcept",
+        "fieldsToExclude": {
+          "fields": [
+            {
+              "fieldName": "project_name"
+            },
+            {
+              "fieldName": "user_name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "24bc25c5-dd0f-4707-94d2-319ca97a0a2d",
+      "name": "Drop Dublicates",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        2360,
+        540
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "dateTime": [
+            {
+              "value1": "={{ $json.timeInterval.end }}",
+              "value2": "={{ $now.minus(2, 'week') }}"
+            }
+          ]
+        }
+      },
+      "id": "a7f5a3c2-ee70-42ce-a002-74ff3aa509f1",
+      "name": "TimeEntry за последние две недели",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 1,
+      "position": [
+        2580,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "duration_abs",
+              "value": "=  {{ ($json.timeInterval.end.toDate() -   $json.timeInterval.start.toDate())/(100*60*60*10)}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a9bc8744-6c2b-46be-af68-20c111df0490",
+      "name": "Считаем абсолютную длительность TimeEntry",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        2760,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.user_name }}  - {{ $json.sum_duration_abs }}",
+        "additionalFields": {}
+      },
+      "id": "23dc0fde-9425-4955-9a58-3bee84513ce0",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        3180,
+        540
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "testbot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": "25"
+            }
+          ]
+        }
+      },
+      "id": "73dfaeac-a872-48f0-aa43-5250e788632b",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        40,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 10
+            }
+          ]
+        }
+      },
+      "id": "9616d03b-91e2-4016-8b61-e2a7c2f138ee",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        40,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "summarize",
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "sum",
+              "field": "duration_abs"
+            }
+          ]
+        },
+        "fieldsToSplitBy": "user_name",
+        "options": {}
+      },
+      "id": "849d3ae3-8bc4-41d3-8267-7be3ff56f0ea",
+      "name": "Суммы по пользователям",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        2960,
+        540
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "6"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-05-19T11:22:08.000Z",
+  "versionId": "b3292318-6d14-40e3-8658-4e9c1c50ab96"
+}
