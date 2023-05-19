@@ -1,0 +1,124 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-05-17T18:52:33.449Z",
+  "id": "12",
+  "name": "zenmoney api",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "b6ec3036-adeb-47df-b724-ee16daf7c125",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        200
+      ],
+      "webhookId": "75f9015d-3f38-4e14-b09c-a205b7394299",
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.zenmoney.ru",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "id": "ada06a1b-de89-4b53-8df9-778dbeff0188",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1080,
+        320
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "7",
+          "name": "zenmoney"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "73412805-85f4-4073-8078-e76b0dc9a8f7",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        900,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "url": "api.zenmoney.ru",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "id": "b9055cf1-4252-47bc-92fe-3001b7e3ce4f",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1080,
+        500
+      ],
+      "credentials": {
+        "oAuth2Api": {
+          "id": "7",
+          "name": "zenmoney"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-05-18T13:58:03.000Z",
+  "versionId": "c803fc2f-7afd-4cdd-af98-e1fb5569f341"
+}
