@@ -172,11 +172,16 @@
             "node": "Суммы по пользователям",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
-    "Schedule Trigger": {
+    "25 число": {
       "main": [
         [
           {
@@ -187,7 +192,7 @@
         ]
       ]
     },
-    "Schedule Trigger1": {
+    "10 число": {
       "main": [
         [
           {
@@ -250,8 +255,8 @@
       ],
       "credentials": {
         "clockifyApi": {
-          "id": "13",
-          "name": "Clockify account"
+          "id": "16",
+          "name": "vlad"
         }
       }
     },
@@ -280,8 +285,8 @@
       ],
       "credentials": {
         "clockifyApi": {
-          "id": "13",
-          "name": "Clockify account"
+          "id": "16",
+          "name": "vlad"
         }
       }
     },
@@ -311,8 +316,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "clockifyApi": {
-          "id": "13",
-          "name": "Clockify account"
+          "id": "16",
+          "name": "vlad"
         }
       },
       "continueOnFail": true
@@ -373,8 +378,8 @@
       "alwaysOutputData": true,
       "credentials": {
         "clockifyApi": {
-          "id": "13",
-          "name": "Clockify account"
+          "id": "16",
+          "name": "vlad"
         }
       },
       "continueOnFail": true
@@ -627,23 +632,26 @@
     },
     {
       "parameters": {
-        "text": "={{ $json.user_name }}  - {{ $json.sum_duration_abs }}",
-        "additionalFields": {}
+        "operation": "summarize",
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "sum",
+              "field": "duration_abs"
+            }
+          ]
+        },
+        "fieldsToSplitBy": "user_name",
+        "options": {}
       },
-      "id": "23dc0fde-9425-4955-9a58-3bee84513ce0",
-      "name": "Telegram",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1,
+      "id": "849d3ae3-8bc4-41d3-8267-7be3ff56f0ea",
+      "name": "Суммы по пользователям",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
       "position": [
-        3180,
+        3020,
         540
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "9",
-          "name": "testbot"
-        }
-      }
+      ]
     },
     {
       "parameters": {
@@ -657,7 +665,7 @@
         }
       },
       "id": "73dfaeac-a872-48f0-aa43-5250e788632b",
-      "name": "Schedule Trigger",
+      "name": "25 число",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
@@ -677,7 +685,7 @@
         }
       },
       "id": "9616d03b-91e2-4016-8b61-e2a7c2f138ee",
-      "name": "Schedule Trigger1",
+      "name": "10 число",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
@@ -687,25 +695,50 @@
     },
     {
       "parameters": {
-        "operation": "summarize",
-        "fieldsToSummarize": {
-          "values": [
+        "chatId": "219815872",
+        "text": "={{ $json.user_name }} -  {{ $json.sum_duration_abs }} ",
+        "additionalFields": {}
+      },
+      "id": "3bf9dfc4-dc66-486f-a13e-93daa436808a",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        3180,
+        540
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "cherrytimer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sort",
+        "sortFieldsUi": {
+          "sortField": [
             {
-              "aggregation": "sum",
-              "field": "duration_abs"
+              "fieldName": "project_name"
+            },
+            {
+              "fieldName": "user_name"
+            },
+            {
+              "fieldName": "timeInterval.end"
             }
           ]
         },
-        "fieldsToSplitBy": "user_name",
         "options": {}
       },
-      "id": "849d3ae3-8bc4-41d3-8267-7be3ff56f0ea",
-      "name": "Суммы по пользователям",
+      "id": "e20c64eb-a956-47d8-b283-31f7961d53ee",
+      "name": "Item Lists",
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        2960,
-        540
+        2980,
+        280
       ]
     }
   ],
@@ -718,6 +751,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-05-19T11:22:08.000Z",
-  "versionId": "b3292318-6d14-40e3-8658-4e9c1c50ab96"
+  "updatedAt": "2023-05-19T17:24:06.000Z",
+  "versionId": "c11e8505-e85d-4584-9ad0-b20c753d1130"
 }
