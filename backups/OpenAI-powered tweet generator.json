@@ -1,0 +1,157 @@
+{
+  "active": false,
+  "connections": {
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FunctionItem": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "FunctionItem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-15T20:20:23.795Z",
+  "id": "9",
+  "name": "OpenAI-powered tweet generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        380,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "f070c774-6672-4056-93be-0e69a0b0271b"
+    },
+    {
+      "parameters": {
+        "functionCode": "// hashtag list\nconst Hashtags = [\n  \"#techtwitter\",\n  \"#n8n\"\n];\n\n// random output function\nconst randomHashtag = Hashtags[Math.floor(Math.random() * Hashtags.length)];\nitem.hashtag = randomHashtag;\nreturn item;"
+      },
+      "name": "FunctionItem",
+      "type": "n8n-nodes-base.functionItem",
+      "position": [
+        580,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "7ec7190c-7480-45a9-aec7-0876e25b8897"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "requestMethod": "POST",
+        "url": "https://api.openai.com/v1/engines/text-davinci-001/completions",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"prompt\": \"Generate a tweet, with under 100 characters, about and including the hashtag {{$node[\"FunctionItem\"].json[\"hashtag\"]}}:\",\n  \"temperature\": 0.7,\n  \"max_tokens\": 64,\n  \"top_p\": 1,\n  \"frequency_penalty\": 0,\n  \"presence_penalty\": 0\n}"
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        780,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "241ea4d2-4e66-43a3-9205-7ab7d61fc035",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": null,
+          "name": ""
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "application": "appOaG8kEA8FAABOr",
+        "table": "main",
+        "options": {}
+      },
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        1180,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "9a3db369-bdff-4f4c-9f7b-4ab49e9ea232",
+      "credentials": {
+        "airtableApi": {
+          "id": null,
+          "name": ""
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "Hashtag",
+              "value": "={{$node[\"FunctionItem\"].json[\"hashtag\"]}}"
+            },
+            {
+              "name": "Content",
+              "value": "={{$node[\"HTTP Request\"].json[\"choices\"][0][\"text\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        980,
+        240
+      ],
+      "typeVersion": 1,
+      "id": "5ca339c6-2c4f-49d7-a2f2-338fe602b7da"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-05-15T20:20:23.795Z",
+  "versionId": "361ff554-a6e1-4918-b861-2cef3622d4d6"
+}
