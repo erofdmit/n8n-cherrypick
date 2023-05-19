@@ -1,0 +1,149 @@
+{
+  "active": true,
+  "connections": {
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-15T20:03:48.222Z",
+  "id": "3",
+  "name": "Autogenerate Content plan weekly",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "-1001931064142",
+        "text": "={{ $json.message.content }}",
+        "additionalFields": {}
+      },
+      "id": "fdecd85c-3948-434b-8fd3-7ed9488d1f3a",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        -40
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "text",
+              "value": "As an AI assistant please generate weekly content plan for IT outsource company about these topics: what are we doing, what is our expertise in IT and development of web and mobile and lowcode and AI and automatization, what requests from clients do we solve and what are popular trends and request at the market right now.  "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f0dadb82-6458-45fb-9598-eddb6feacb8a",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1720,
+        -40
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "role": "assistant",
+              "content": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1f562512-c9a4-4ea9-a3ba-d080c9d52b64",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        -40
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "5",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "daysInterval": 2,
+              "triggerAtHour": 11
+            }
+          ]
+        }
+      },
+      "id": "e7225e8f-9928-4159-8b9a-9b0be19d863f",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        -40
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "6"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-05-15T20:08:39.000Z",
+  "versionId": "fbc5d430-c051-4009-8621-30dff54d4c9e"
+}
