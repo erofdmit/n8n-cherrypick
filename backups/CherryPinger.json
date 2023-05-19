@@ -1,0 +1,138 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-15T19:06:02.008Z",
+  "id": "1",
+  "name": "CherryPinger",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 13,
+              "triggerAtMinute": 14
+            }
+          ]
+        }
+      },
+      "id": "e32a7222-397e-4516-8ea1-84da3dd1483c",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "290930695",
+        "text": "Good mo, CherryPickers! What's on your plate today?",
+        "additionalFields": {}
+      },
+      "id": "72571045-774c-4500-8d6d-7b1e86ce91da",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "290930695",
+        "text": "Доброе утро! Пожалуйста, не забудьте проставить тайм-треки в Clockify - это важно!",
+        "additionalFields": {}
+      },
+      "id": "2b84de54-2dcb-4cd7-9a37-4e42deeeb40a",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        600
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                3
+              ],
+              "triggerAtHour": 13,
+              "triggerAtMinute": 14
+            }
+          ]
+        }
+      },
+      "id": "122b3e23-9e7f-4419-931b-61d72b011e0b",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        600
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveExecutionProgress": true,
+    "errorWorkflow": "6"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    },
+    "node:Schedule Trigger1": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2023-05-17T10:13:16.000Z",
+  "versionId": "67b4d53b-1f22-4361-b8fc-a9906cefb922"
+}
